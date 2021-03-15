@@ -127,7 +127,7 @@ pub fn new_from_descriptor(desc: &CTFontDescriptor, pt_size: f64) -> CTFont {
 
 pub fn new_from_buffer(buffer: &[u8]) -> Result<CTFont, ()> {
     let ct_font_descriptor = create_font_descriptor(buffer)?;
-    Ok(new_from_descriptor(&ct_font_descriptor, 16.0))
+    Ok(new_from_name(&ct_font_descriptor.font_name(), 16.0)?)
 }
 
 pub fn new_from_name(name: &str, pt_size: f64) -> Result<CTFont, ()> {

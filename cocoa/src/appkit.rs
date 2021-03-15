@@ -933,6 +933,12 @@ pub trait NSWindow: Sized {
     unsafe fn drawers(self) -> id;
     unsafe fn windowController(self) -> id;
     unsafe fn setWindowController_(self, windowController: id);
+    unsafe fn addChildWindow_(self, child_win:id, place: NSWindowOrderingMode);
+    unsafe fn removeChildWindow_(self, child_win:id);
+
+    unsafe fn ChildWindows_(self) ->  id ;
+    unsafe fn parentWindow_(self) ->  id ;
+
 
     // TODO: Managing Sheets
 
@@ -1300,6 +1306,23 @@ impl NSWindow for id {
     unsafe fn setWindowController_(self, windowController: id) {
         msg_send![self, setWindowController:windowController]
     }
+    unsafe fn addChildWindow_(self, child_win: id, place: NSWindowOrderingMode){
+        msg_send![self, addChildWindow:child_win ordered:place]
+    }
+    unsafe fn removeChildWindow_(self, child_win:id){
+        msg_send![self, removeChildWindow:child_win ]
+
+    }
+
+    unsafe fn ChildWindows_(self) ->  id {
+        msg_send![self, childWindows]
+    }
+
+    unsafe fn parentWindow_(self) ->  id {
+        msg_send![self, parentWindow]
+
+    }
+
 
     // TODO: Managing Sheets
 
